@@ -13,8 +13,8 @@ for index in $(seq 1 ${run_time}); do
 
   if [[ ${verbose} == true ]]
   then
-    stdout_file=/dev/stdout
-    stderr_file=/dev/stderr
+    stdout_file=./logs/stdout.log
+    stderr_file=./logs/stderr.log
     disable_tqdm=False
   else
     stdout_file=${output_dir}.log
@@ -22,7 +22,8 @@ for index in $(seq 1 ${run_time}); do
     disable_tqdm=True
   fi
 
-  CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES} ${run_command} run_uie_finetune.py \
+  # CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES} 
+  ${run_command} run_uie_finetune.py \
     --do_train --do_eval --do_predict ${constraint_decoding} ${fp16} \
     --use_fast_tokenizer=True \
     --ddp_find_unused_parameters=False \
